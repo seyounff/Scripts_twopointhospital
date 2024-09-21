@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"Fame"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : TPH.exe
+  Version: 
+  Date   : 2024-09-21
+  Author : skdia
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,41 89 86 48 01 00 00 49 8B CE) // should be unique
+alloc(newmem,$1000,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [r14+00000148],#10000
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop 2
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 41 89 86 48 01 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 183359A619D
+
+183359A616F: FF 50 D0                       - call qword ptr [rax-30]
+183359A6172: 48 8B D0                       - mov rdx,rax
+183359A6175: 48 8B 45 D0                    - mov rax,[rbp-30]
+183359A6179: 48 8B C8                       - mov rcx,rax
+183359A617C: 83 38 00                       - cmp dword ptr [rax],00
+183359A617F: 48 8D AD 00 00 00 00           - lea rbp,[rbp+00000000]
+183359A6186: 49 BB F0 E7 9A E6 82 01 00 00  - mov r11,00000182E69AE7F0
+183359A6190: 41 FF D3                       - call r11
+183359A6193: 49 63 86 48 01 00 00           - movsxd  rax,dword ptr [r14+00000148]
+183359A619A: 2B 45 E0                       - sub eax,[rbp-20]
+// ---------- INJECTING HERE ----------
+183359A619D: 41 89 86 48 01 00 00           - mov [r14+00000148],eax
+// ---------- DONE INJECTING  ----------
+183359A61A4: 49 8B CE                       - mov rcx,r14
+183359A61A7: 48 8D AD 00 00 00 00           - lea rbp,[rbp+00000000]
+183359A61AE: 49 BB 20 64 9A 35 83 01 00 00  - mov r11,00000183359A6420
+183359A61B8: 41 FF D3                       - call r11
+183359A61BB: 49 8B 46 38                    - mov rax,[r14+38]
+183359A61BF: 48 8B C8                       - mov rcx,rax
+183359A61C2: 49 8B D7                       - mov rdx,r15
+183359A61C5: 83 38 00                       - cmp dword ptr [rax],00
+183359A61C8: 48 8D 64 24 00                 - lea rsp,[rsp+00]
+183359A61CD: 90                             - nop 
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"Money"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : TPH.exe
+  Version: 
+  Date   : 2024-09-21
+  Author : skdia
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscan(INJECT,89 87 CC 00 00 00 48 8B 4F) // should be unique
+alloc(newmem,$1000,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [rdi+000000CC],#10000000
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+
+INJECT:
+  db 89 87 CC 00 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 183353072BB
+
+1833530728D: 48 8B C8                       - mov rcx,rax
+18335307290: 83 39 00                       - cmp dword ptr [rcx],00
+18335307293: 0F B6 40 18                    - movzx eax,byte ptr [rax+18]
+18335307297: 85 C0                          - test eax,eax
+18335307299: 0F 84 34 03 00 00              - je 183353075D3
+1833530729F: 48 63 8F CC 00 00 00           - movsxd  rcx,dword ptr [rdi+000000CC]
+183353072A6: 48 63 56 18                    - movsxd  rdx,dword ptr [rsi+18]
+183353072AA: 48 8D 6D 00                    - lea rbp,[rbp+00]
+183353072AE: 49 BB 50 81 9A 35 83 01 00 00  - mov r11,00000183359A8150
+183353072B8: 41 FF D3                       - call r11
+// ---------- INJECTING HERE ----------
+183353072BB: 89 87 CC 00 00 00              - mov [rdi+000000CC],eax
+// ---------- DONE INJECTING  ----------
+183353072C1: 48 8B 4F 38                    - mov rcx,[rdi+38]
+183353072C5: 48 63 97 CC 00 00 00           - movsxd  rdx,dword ptr [rdi+000000CC]
+183353072CC: 66 90                          - nop 2
+183353072CE: 49 BB E0 76 30 35 83 01 00 00  - mov r11,00000183353076E0
+183353072D8: 41 FF D3                       - call r11
+183353072DB: 48 63 46 18                    - movsxd  rax,dword ptr [rsi+18]
+183353072DF: 85 C0                          - test eax,eax
+183353072E1: 0F 8E B4 00 00 00              - jng 1833530739B
+183353072E7: 0F B6 46 1C                    - movzx eax,byte ptr [rsi+1C]
+183353072EB: 85 C0                          - test eax,eax
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
